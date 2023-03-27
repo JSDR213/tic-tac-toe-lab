@@ -1,6 +1,6 @@
 //JS code goes here!
 
-//remember to Whiteboard and Pseduocode before diving into the actual code!
+//remember to Whiteboard and Pseudocode before diving into the actual code!
 
 
 //getting DOM elements
