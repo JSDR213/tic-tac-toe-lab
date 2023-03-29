@@ -10,8 +10,9 @@ This month we have been learning about the DOM. We will be making a Tic Tac Toe 
 
 ## Objectives
 - Build a tic tac toe game in HTML, CSS, and vanilla JavaScript
-- Use best practices when writing code, DRY (Do Not Repeat Yourself) code is always a better option
-- Create a portfolio worthy project with your own personal style
+- Use best practices when writing code, DRY (Don't Repeat Yourself) less code is always a better option
+- Create a portfolio worthy project with your own personal style!
+- My Note: Honestly, You have 4 Assignments to complete in the next few days!
 
 ## What You'll Be Building
 Feel free to implement your own style or theme when building your game, it might be something you want to put on a portfolio showing off your skills!
