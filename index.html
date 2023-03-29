@@ -1,5 +1,9 @@
 <head>
     <title> JS DOM-Tac-Toe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Jolly+Lodger&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css"/>
 
 </head>
@@ -7,13 +11,13 @@
 
 <body>
 <header>
-  <h1>Tic-Tac-Toe</h1>
+  <h1>Chicken vs. Egg Death Match</h1>
   <h2>
     <table class = "score-track">
       <tr class="score-columns-all">
-        <th class="score-column">Player X </th>
+        <th class="score-column">Player &#128019; </th>
         <th class="score-column">Ties</th>
-        <th class="score-column">Player O</th>
+        <th class="score-column">Player  &#129370;</th>
       </tr>
       <tr>
         <td class="score-row" id="playerXScore">0</th>
@@ -37,6 +41,8 @@
         <div class="square" id="square7" square-index="7"></div>
         <div class="square" id="square8" square-index="8"></div>
       </div>
+      <h3 id="status_text"></h3>
+      <h4 id="best_of"></h4>
 </main>
 
 <footer>
