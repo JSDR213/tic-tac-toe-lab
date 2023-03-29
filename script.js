@@ -4,8 +4,7 @@
 
 
 //getting DOM elements
-
-
+//setting code
 //win conditions
 
 
