@@ -1,7 +1,7 @@
 // **** TO DO ****:
-//find deadends
+//find deadends and declare as ties
 //display nice winning message
-//add best of 3 toggle
+//add best of 3 or 5 toggle
 
 let turn = 0
 let playerXpositions = []
