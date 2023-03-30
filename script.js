@@ -1,7 +1,10 @@
 // **** TO DO ****:
-//find deadends and declare as ties
 //display nice winning message
+//prompt for player names and displays
 //add best of 3 or 5 toggle
+//find deadends and declare as ties
+//make x's and x name black; make o's and o name white
+
 
 let turn = 0
 let playerXpositions = []
@@ -39,7 +42,7 @@ const checkForWin = (positions, player) => {
 
     for (i = 0; i < winCombos.length; i ++) {
         if(isSubset(positions, winCombos[i])){
-            alert(`${player} Won!`)
+            alert(`Player ${player} Won!`)
             addToScoreboard(player)
             restart()
         }
