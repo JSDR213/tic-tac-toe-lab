@@ -58,16 +58,30 @@ body {
     border-radius: 50%;
     background-color: black;
     color: white;
-    font-size: 30px;;
+    font-size: 20px;;
   }
   .restart:hover {
     font-weight: bold;
-    border: 5px solid white;
+    border: 1px solid white;
     border-radius: 50%;
     padding: 15px
   
   }
-
+  .reset {
+    width: 175px;
+    border: none;
+    border-radius: 50%;
+    background-color: black;
+    color: red;
+    font-size: 20px;;
+  }
+  .reset:hover {
+    font-weight: bold;
+    border: 1px solid white;
+    border-radius: 50%;
+    padding: 15px
+  
+  }
 
   footer{
     text-align: center;
