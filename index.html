@@ -1,7 +1,7 @@
 <head>
     <title> JS DOM-Tac-Toe</title>
     <link rel="stylesheet" href="style.css"/>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 
 
@@ -11,9 +11,9 @@
   <h2>
     <table class = "score-track">
       <tr class="score-columns-all">
-        <th class="score-column">Player X </th>
+        <th id = xturn class="score-column">Player X </th>
         <th class="score-column">Ties</th>
-        <th class="score-column">Player O</th>
+        <th id = oturn class="score-column">Player O</th>
       </tr>
       <tr>
         <td class="score-row" id="playerXScore">0</th>
@@ -41,7 +41,7 @@
 
 <footer>
 
-    <button class="restart">Restart</button>
+    <button class="restart" id="reset">Restart</button>
 
 </footer>
 
