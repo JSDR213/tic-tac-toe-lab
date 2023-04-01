@@ -33,7 +33,8 @@
 
 //game logic
 
-const squareValues = {
+// this object contains all of the square values and I can use it to compare vs win conditions
+let squareValues = {
     square0: null,
     square1: null,
     square2: null,
@@ -43,23 +44,159 @@ const squareValues = {
     square6: null,
     square7: null,
     square8: null,
-    isItXsTurn: true
+    isItXsTurn: true,
+    squareMark: null,
+    gameWon: false,
+    gameDraw: false,
 }
 
 const square = document.querySelectorAll('.square')
 
-square.forEach(function(currentSquare) {
-    currentSquare.addEventListener('click', (event) => {
-        const target = event.currentSquare
-        console.log('clicked!')
-        scoreKeeper(currentSquare)
-    })
-})
+const title = document.querySelector('h1')
 
-function scoreKeeper (foo) {
-    const {isItXsTurn} = squareValues
-    squareValues.isItXsTurn = false
-    console.log(squareValues)
+// Had to use .innerText and then parseInt
+let xScore = document.getElementById('playerXScore').innerText
+
+let oScore = document.getElementById('playerOScore').innerText
+
+
+square.forEach(function(currentSquare) {
+    if (square.innerText === 'X' || square.innerText === 'O') {
+        return
+    }
+    else {
+    currentSquare.addEventListener('click', (event) => {
+        console.log(squareValues)
+        const target = event.currentTarget
+        if (squareValues.gameWon == true) {
+            return
+        }
+        if (!target.matches('div')) {
+            return
+        }
+        if (target.classList.contains('square')) {
+            turnTracker(target.id)
+        }
+        // calls the winConditions function that sets gameWon to true, which triggers the
+        // if (squareValues.gameWon == true) statement above and returns
+        winConditions(squareValues)
+        scoreTally (squareValues)
+    })
+}
+}
+)
+
+
+
+function turnTracker (foo) {
+    const {currentBoard} = squareValues
+    const target = event.currentTarget
+    if (target.id == 'square0') {
+        if (target.innerText === 'X' || target.innerText === 'O') {
+            return
+        }
+        else {
+        // some function that goes between X and O here
+        crossOrCircle(target.id)
+        squareValues.square0 = squareValues.squareMark // replace X with the output of the X and O function used above
+        //console.log(squareValues)
+        // need something that removes event listeners from cells that are clicked
+        //target.removeEventListener('click', target.id)
+        target.innerText = squareValues.squareMark
+        }
+    }
+    if (target.id == 'square1') {
+        if (target.innerText === 'X' || target.innerText === 'O') {
+            return
+        }
+        else {
+        crossOrCircle(target.id)
+        squareValues.square1 = squareValues.squareMark
+        target.innerText = squareValues.squareMark
+        }
+    }
+    if (target.id == 'square2') {
+        if (target.innerText === 'X' || target.innerText === 'O') {
+            return
+        }
+        else {
+        crossOrCircle(target.id)
+        squareValues.square2 = squareValues.squareMark
+        target.innerText = squareValues.squareMark
+        }
+    }
+    if (target.id == 'square3') {
+        if (target.innerText === 'X' || target.innerText === 'O') {
+            return
+        }
+        else {
+        crossOrCircle(target.id)
+        squareValues.square3 = squareValues.squareMark
+        target.innerText = squareValues.squareMark
+        }
+    }
+    if (target.id == 'square4') {
+        if (target.innerText === 'X' || target.innerText === 'O') {
+            return
+        }
+        else {
+        crossOrCircle(target.id)
+        squareValues.square4 = squareValues.squareMark
+        target.innerText = squareValues.squareMark
+        }
+    }
+    if (target.id == 'square5') {
+        if (target.innerText === 'X' || target.innerText === 'O') {
+            return
+        }
+        else {
+        crossOrCircle(target.id)
+        squareValues.square5 = squareValues.squareMark
+        target.innerText = squareValues.squareMark
+        }
+    }
+    if (target.id == 'square6') {
+        if (target.innerText === 'X' || target.innerText === 'O') {
+            return
+        }
+        else {
+        crossOrCircle(target.id)
+        squareValues.square6 = squareValues.squareMark
+        target.innerText = squareValues.squareMark
+        }
+    }
+    if (target.id == 'square7') {
+        if (target.innerText === 'X' || target.innerText === 'O') {
+            return
+        }
+        else {
+        crossOrCircle(target.id)
+        squareValues.square7 = squareValues.squareMark
+        target.innerText = squareValues.squareMark
+        }
+    }
+    if (target.id == 'square8') {
+        if (target.innerText === 'X' || target.innerText === 'O') {
+            return
+        }
+        else {
+        crossOrCircle(target.id)
+        squareValues.square8 = squareValues.squareMark
+        target.innerText = squareValues.squareMark
+        }
+    }
+    //squareValues.isItXsTurn = false
+    //console.log(squareValues)
+    //console.log(`${squareValues.isItXsTurn}`)
+    if (squareValues.isItXsTurn === false) {
+        title.innerText = "It is O's turn!"
+    }
+    if (squareValues.isItXsTurn === true) {
+        title.innerText = "It is X's turn!"
+    }
+
+
+
 }
 
 
@@ -68,46 +205,113 @@ function crossOrCircle (toggle) {
     const {isItXsTurn} = squareValues
     if (isItXsTurn === false) {
         squareValues.isItXsTurn = true
-        console.log(squareValues)
+        squareValues.squareMark = 'O'
+        //console.log(squareValues)
+    }
+    if (isItXsTurn === true) {
+        squareValues.isItXsTurn = false
+        squareValues.squareMark = 'X'
+        //console.log(squareValues)
     }
 }
 
+// function that compares what's in the squares object vs winning conditions
+// This function will contain ALL winning combinations
+function winConditions (squareValues) {
+    const {square0, square1, square2, square3, square4, square5, square6, square7, square8} = squareValues
+    //console.log(squareValues)
+    for (i = 0; i < 8; i++) {
+    // top row all matches
+    if (square0 == square1 && square1 == square2 && square0 != null && square1 != null && square2 != null) {
+        title.innerText = 'Winner!'
+        // Assigning true to squareValues.gameWon global
+        squareValues.gameWon = true
+        // returns this value to global
+        return squareValues.gameWon
+    }
+    // middle row all matches
+    else if (square3 == square4 && square4 == square5 && square3 != null && square4 != null && square5 != null) {
+        title.innerText = 'Winner!'
+        squareValues.gameWon = true
+        return squareValues.gameWon
+    }
+    // bottom row all matches
+    else if (square6 == square7 && square7 == square8 && square6 != null && square7 != null && square8 != null) {
+        title.innerText = 'Winner!'
+        squareValues.gameWon = true
+        return squareValues.gameWon
+    }
+    // left column all matches
+    else if (square0 == square3 && square3 == square6 && square0 != null && square3 != null && square6 != null) {
+        title.innerText = 'Winner!'
+        squareValues.gameWon = true
+        return squareValues.gameWon
+    }
+    // middle column all matches
+    else if (square1 == square4 && square4 == square7 && square1 != null && square4 != null && square7 != null) {
+        title.innerText = 'Winner!'
+        squareValues.gameWon = true
+        return squareValues.gameWon
+    }
+    // right column all matches
+    else if (square2 == square5 && square5 == square8 && square2 != null && square5 != null && square8 != null) {
+        title.innerText = 'Winner!'
+        squareValues.gameWon = true
+        return squareValues.gameWon
+    }
+    // diagonal top left to bottom right
+    else if (square0 == square4 && square4 == square8 && square0 != null && square4 != null && square8 != null) {
+        title.innerText = 'Winner!'
+        squareValues.gameWon = true
+        return squareValues.gameWon
+    }
+    // diagonal bottom left to top right
+    else if (square2 == square4 && square4 == square6 && square2 != null && square4 != null && square6 != null) {
+        title.innerText = 'Winner!'
+        squareValues.gameWon = true
+        return squareValues.gameWon
+    }
+    else if (square0 != null && square1 != null && square2 != null && square3 != null && square4 != null
+        && square5 != null && square6 != null && square7 != null && square8 != null) {
+        title.innerText = "Cat's game!"
+        squareValues.gameDraw = true
+        return squareValues.gameDraw
+    }
+    }
+}
 
-//for (i=0; i<9; i++){
-//    if (i%2 == 0) {
-        // then something innertext X
-        //else {
-            // then something innertext O
-        //}
-//    }
-//}
+function scoreTally (squareValues) {
+    if (squareValues.gameWon == true) {
+        if (squareValues.squareMark == 'X') {
+            xScore = parseInt(xScore)
+            xScore = xScore + 1
+            console.log(xScore)
+            playerXScore.innerText = xScore
+        }
+        if (squareValues.squareMark == 'O') {
+            oScore = parseInt(oScore)
+            oScore = oScore + 1
+            console.log(oScore)
+            playerOScore.innerText = oScore
+        }
+    }
+}
+
+// need to write a restart button that empties all values on the board and in the squareValues object
+function reset () {
+    document.querySelector('restart').addEventListener('click', (event) => {
+        square.forEach(bar)
+        function bar (placeholder) {
+
+        }
+    })
+}
 
 
-
-//square0.addEventListener('click', function() {
-//    console.log(`clicked on 0`)
-//})
-
-
-
-//what else will you need?
-//for (i = 0; i < 9; i++) {
-//    playedSquare[i].addEventListener('click', function() {
-//        console.log(`clicked on ${i}!`)
-//    })
-//}
-
-// const playedSquare = document.querySelectorAll('.square')
-
-
-
-
-
-
-// const crossOrCircle = 0
-//for (id = 0; id < 9; id++) {
-//function click(id) {
-//    let playedSquare = document.getElementById('square'+id)
-//    console.log('clicked on ${id}')
+// function that locks all squares by removing eventListeners if gameWon = true
+//function lockSquares (squareValues) {
+//    const {gameWon} = squareValues
+//    if (gameWon == true) {
+//        document.removeEventListener('click', event)
 //    }
 //}
