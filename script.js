@@ -122,6 +122,7 @@ function checkWinner() {
         count = 0
         ties.innerText = dTies
         alert("Tie, ya Bum!")
+        winner = true
     }
 }
 
@@ -130,6 +131,7 @@ $(document).ready(function(){
       
         if (winner === true){
             resetBtn() 
+            winner = false
         } else if (turn === 1 && this.innerText === ""){
             this.innerText = "X"
             turn *= -1
@@ -142,7 +144,7 @@ $(document).ready(function(){
             oturn.style.color = "#FFFFFF"
             xturn.style.color = "#CC8899"
             checkWinner()
-        }else {
+        } else {
             alert("Chose Another Location")
         }
 
