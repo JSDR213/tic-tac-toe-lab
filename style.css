@@ -1,11 +1,19 @@
 body {
-    background-color: black;
-    color: white;
+    background-color: rgb(1, 0, 48);
+    color: rgb(255, 0, 242);
   }
   h1 {
     text-align: center;
   }
   
+  #winnerBanner{
+    text-align: center;
+    font-size: 20px;
+    color:  red;
+    animation-name: colorChange;
+    animation: colorChange 4s infinite;
+  }
+
   .game-board {
      display: grid;
      grid-template-columns: 1fr 1fr 1fr;
@@ -22,10 +30,11 @@ body {
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 5px solid white;
+      border: 5px solid rgb(255, 52, 248);
       text-Align: center;
-      color: white;
+      color: rgb(82, 255, 246);
   }
+  
   .square:nth-child(1), .square:nth-child(2), .square:nth-child(3) {
       border-top: none
   }
@@ -46,6 +55,7 @@ body {
   .score-column {
     padding: 0 15px 0 15px;
     border-bottom: 1px solid black;
+    color:rgb(82, 255, 246)
   
   }
   .win {
@@ -53,23 +63,33 @@ body {
     text-align: center;
   }
   .restart {
-    width: 175px;
+    width: 150px;
+    height: 70px;
     border: none;
-    border-radius: 50%;
-    background-color: black;
-    color: white;
+    border-radius: 50px 50px 50px 50px;
+    background-color: rgb(252, 255, 82);
+    color: rgb(143, 38, 255);
     font-size: 30px;;
   }
+
   .restart:hover {
     font-weight: bold;
-    border: 5px solid white;
-    border-radius: 50%;
+    border: 5px solid rgb(143, 38, 255);
+    border-radius: 50px 50px 50px 50px;
     padding: 15px
-  
   }
-
 
   footer{
     text-align: center;
     margin-top: 5rem;
+  }
+
+  @keyframes colorChange {
+    /* from {color:  red;}
+    to {color: yellow;} */
+    0%{ color: red;}
+    25%{color: yellow;}
+    50%{color: cyan;}
+    75%{color: rgb(172, 0, 246);}
+    100%{color: rgb(255, 0, 183);}
   }
