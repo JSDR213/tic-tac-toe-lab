@@ -1,110 +1,166 @@
-//https://www.studytonight.com/post/building-a-tic-tac-toe-game-in-javascript
+//This was a tough project and I spent more time than I should have by trying to write code before I had enough figured out
+//Also I tried to write the whole then, and then tried to see if it worked instead of writing the click handler first, getting that working
+//and then moving on to the next step. I re-wrote the code a few times to get to the finished product and I learned several valuable lessons.
 
-//https://github.com/WebDevSimplified/JavaScript-Tic-Tac-Toe/blob/master/script.js
-
-//https://www.youtube.com/watch?v=AnmwHjpEhtA
-
-let score = 0
-let playerX = document.getElementById('playerXScore')
-let playerO = document.getElementById('playerOScore')
-let draw = document.getElementById('ties')
+let playerXScore = 0
+let playerOScore = 0
+let catScore = 0
 const squares = document.querySelectorAll('.square')
+const firstPlayer = 'X'
+let playerX = document.getElementById('playerXScore')
+const secondPlayer = 'O'
+let playerO = document.getElementById('playerOScore')
+const cat = document.getElementById('ties')
+let currentPlayer = firstPlayer
+const restartGameButton = document.querySelector('.restart-game')
+const resetScore = document.querySelector('.reset-score')
 const winner = document.querySelector('.win')
-const restartButton = document.querySelector('.restart')
-const winnerPositions = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [0, 3, 6],
-  [1, 4, 7],
-  [2, 5, 8],
-  [0, 4, 8],
-  [2, 4, 6]
-]
-let possibleMoves = ['', '', '', '', '', '', '', '', '']
-let currentPlayer = 'X'
-let circleTurn = false
+let matchWon = false
+//For playing against the computer I found code from the internet and modified it to fit my game
+const computerOpponentRadio = document.getElementById('computer')
+const humanOpponentRadio = document.getElementById('human')
+let isPlayingAgainstComputer = false
+const winningCombos = [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7],
+[2, 5, 8], [0, 4, 8], [2, 4, 6] ]
+let movesLeft = ['', '', '', '', '', '', '', '', '']
 
-startGame()
-
-function startGame() {
-  squares.forEach(square => square.addEventListener('click', mouseClick))
-  restartButton.addEventListener('click', restartGame)
-  winner.innerText = `${currentPlayer}'s turn`
-  circleTurn = true
+startGame = () => {
+    squares.forEach(square => square.addEventListener('click', markSquare()))
+    restartGameButton.addEventListener('click', restartGame)
+    //For playing against the computer I found code from the internet and modified it to fit my game
+    computerOpponentRadio.addEventListener('change', handleOpponentSelection)
+    humanOpponentRadio.addEventListener('change', handleOpponentSelection)
+    winner.textContent = firstPlayer
+    updatePlayerText()
 }
 
-function mouseClick() {
-  const squareIndex = this.getAttribute('square-index')
-  if(possibleMoves[squareIndex] != '' || !circleTurn) {
-    return
-  }
-  updateSquare(this, squareIndex)
-  seeIfIWon()
-}
-
-function updateSquare(square, index) {
-  possibleMoves[index] = currentPlayer
-  square.textContent = currentPlayer
-}
-
-function otherPlayer() {
-  currentPlayer = (currentPlayer == 'X') ? 'O' : 'X'
-  winner.textContent = `${currentPlayer}'s turn`
-}
-
-function seeIfIWon() {
-  let matchWon = false
-
-  for(let i = 0; i < winnerPositions.length; i++) {
-    const moves = winnerPositions[i]
-    const squareA = possibleMoves[moves[0]]
-    const squareB = possibleMoves[moves[1]]
-    const squareC = possibleMoves[moves[2]]
-
-    if(squareA == '' || squareB == '' || squareC == '') {
-      continue;
+//For playing against the computer I found code from the internet and modified it to fit my game
+handleOpponentSelection = () => {
+    isPlayingAgainstComputer = (computerOpponentRadio.checked)
+    if (isPlayingAgainstComputer) {
+      currentPlayer = firstPlayer
+      updatePlayerText()
+      markSquare()    
+    } else {
+      updatePlayerText()
     }
-    if(squareA == squareB && squareB == squareC) {
-      matchWon = true
-      break
+}
+
+//For playing against the computer I found code from the internet and modified it to fit my game
+computerMove = () => {
+    let availableMoves = []
+    for (let i = 0; i < movesLeft.length; i++) {
+      if (movesLeft[i] === '') {
+        availableMoves.push(i)
+      }
     }
-  }
-  if(matchWon) {
-    winner.textContent = `${currentPlayer} wins!` 
-    circleTurn = false
-    if(currentPlayer == 'X') {
-      score += 1
-      playerX.innerText = score
-      console.log('x wins')
+    const randomIndex = Math.floor(Math.random() * availableMoves.length)
+    const squareIndex = availableMoves[randomIndex]
+    const square = squares[squareIndex]
+    setTimeout(() => {
+        updateSquare(square, squareIndex)
+        disableSquares()
+        checkWin()
+      }, 1000)
+}
+
+restartGame = () => {
+    currentPlayer = firstPlayer
+    movesLeft = ['', '', '', '', '', '', '', '', '']
+    squares.forEach(cell => cell.textContent = '')
+    updatePlayerText()
+    matchWon = false
+    winner.textContent = `Players ${currentPlayer}'s turn`
+    markSquare()
+}
+
+updateScores = () => {
+    playerX.innerText = playerXScore
+    playerO.innerText = playerOScore
+    cat.innerText = catScore
+}
+
+updateSquare = (square, index) => {
+    movesLeft[index] = currentPlayer
+    square.textContent = currentPlayer
+}
+
+handleSquareClick = (event) => {
+    const square = event.target
+    const index = square.getAttribute('square-index')
+    if (movesLeft[index] != '') {
+        return;
     }
-    else if(currentPlayer == 'O') {
-      score += 1
-      playerO.innerText = score
-      console.log('o wins')
+    if (currentPlayer === firstPlayer) {
+        square.textContent  = firstPlayer
+        movesLeft[index] = firstPlayer
+    } else if (currentPlayer === secondPlayer && isPlayingAgainstComputer) {
+        square.textContent = secondPlayer
+        movesLeft[index] = secondPlayer
+        computerMove()
+    } else {
+        square.textContent = currentPlayer
+        movesLeft[index]  = currentPlayer
+    } 
+    updateSquare(square, index)
+    checkWin()
+    disableSquares()
+}
+
+markSquare = () => {
+    squares.forEach((square) => {
+        square.addEventListener('click', handleSquareClick)
+        
+    })
+}
+
+disableSquares = () => {
+    squares.forEach((square) => {
+        if (square.textContent == firstPlayer || square.textContent == secondPlayer) {
+        square.removeEventListener('click', handleSquareClick)
+        } else if (matchWon == true) {
+        square.removeEventListener('click', handleSquareClick) 
+        }
+    })
+}
+
+checkWin = () => {
+    for(let i = 0; i < winningCombos.length; i++) {
+        const [a, b, c] = winningCombos[i];
+        if (movesLeft[a] !== '' && movesLeft[a] === movesLeft[b] && movesLeft[a] === movesLeft[c]) {
+            matchWon = true
+            break
+        } 
+    }
+    if (matchWon) {
+        playerXScore += currentPlayer === firstPlayer ? 1 : 0
+        playerOScore += currentPlayer === secondPlayer ? 1 : 0
+        updateScores()
+        disableSquares()
+        winner.textContent = `Player ${currentPlayer} wins!`
+    } else if (!movesLeft.includes('')) {
+        catScore++
+        updateScores()
+        disableSquares()
+        winner.textContent = 'CAT WINS!!'
+    } else if (currentPlayer === firstPlayer && isPlayingAgainstComputer) {
+        currentPlayer = secondPlayer
+        updatePlayerText()
+        computerMove()
     }
     else {
-    return
+        currentPlayer = currentPlayer === firstPlayer ? secondPlayer : firstPlayer
+        updatePlayerText()
     }
-  }
-  else if(!possibleMoves.includes('')) {
-    winner.textContent = 'Draw!'
-    score += 1
-    draw.innerText = score
-    console.log('draw')
-    circleTurn = false
-  }
-  else {
-    otherPlayer()
-  }
 }
 
-function restartGame() {
-  score = 0
-  currentPlayer = 'X'
-  possibleMoves = ['', '', '', '', '', '', '', '', '']
-  winner.textContent = `${currentPlayer}'s turn`
-  squares.forEach(cell => cell.textContent = '')
-  circleTurn = true
-}
+updatePlayerText = () => winner.textContent = `Players ${currentPlayer}'s turn`
 
+resetScore.addEventListener('click', () => {
+    playerXScore = 0
+    playerOScore = 0
+    catScore = 0
+    updateScores()
+})
+
+startGame()
