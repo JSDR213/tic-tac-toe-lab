@@ -63,17 +63,16 @@
 
 // declaring variables for all of the elements that we'll need: individual tiles, the title, the restart button, and where we are keeping score
 const squares = document.querySelectorAll('.square')
-// const playerDisplay = document.getElementById('playerOScore')
 let playerDisplay = document.getElementById('title1')
 const resetButton = document.querySelector('.restart')
 const announcer = document.querySelector('.score-track')
-let pXScore = document.getElementById('playerXScore')
-let pOScore = document.getElementById('playerOScore')
-let tScore = document.getElementById('ties')
-console.log(pXScore.innerHTML)
+let pXScore = parseInt(document.getElementById('playerXScore').innerText=0)
+let pOScore = parseInt(document.getElementById('playerOScore').innerText=0)
+let tScore = parseInt(document.getElementById('ties').innerText=0)
+
+
 // more variables that we'll need for the game.
 // including the game board itself, the current player, the game state, the different outcomes, and the win criteria
-
 let board = ['', '', '', '', '', '', '', '', '']
 let currentPlayer = 'x'
 let isGameActive = true
@@ -92,6 +91,33 @@ const winCriteria = [
     [0, 4, 8],
     [2, 4, 6],
 ]
+
+
+// creating new element to add to DOM to show winner:
+const declarationX = () => {
+    let newE = document.createElement("h1");
+    let newText = document.createTextNode(playerXWon);
+    newE.appendChild(newText);
+    let tester = document.getElementById("title1");
+    tester.appendChild(newE)
+}
+
+const declarationO = () => {
+    let newE2 = document.createElement("h1");
+    let newText2 = document.createTextNode(playerOWon);
+    newE2.appendChild(newText2);
+    let tester = document.getElementById("title1");
+    tester.appendChild(newE2)
+}
+
+const declarationT = () => {
+    let newE3 = document.createElement("h1");
+    let newText3 = document.createTextNode(tie);
+    newE3.appendChild(newText3);
+    let tester = document.getElementById("title1");
+    tester.appendChild(newE3)
+}
+
 // event listener to listen to each square on the board
 // upon clicking, the userAction function will be called, referencing the tile and index
 squares.forEach((square, index) => {
@@ -139,32 +165,6 @@ let changePlayer = () => {
     currentPlayer = currentPlayer === 'x' ? 'o' : 'x';
     console.log(currentPlayer)
     playerDisplay.innerText = `${currentPlayer}'s turn`
-    // playerDisplay.classList.add(`${currentPlayer}sturn`)
-}
-
-
-// announces winner/ end game state to the user
-// it receives an end game state (type), and based on that, we will modify the html
-// first: how do we do this without disrupting the game board?
-// second: if we do disrupt the gameboard, then how do we reset it?
-const announce = (type) => {
-    console.log('announcements are happening')
-    switch(type){
-        case playerOWon:
-            // document.querySelector('.game-board').innerHTML = playerOWon
-            console.log('firing O');
-            return pOScore.innerHTML += 1;
-            break;
-        case playerXWon:
-            // document.querySelector('.game-board').innerHTML = playerXWon;
-            console.log('firing X');
-            return pXScore.innerHTML += 1;
-            break;
-        case tie:
-            document.querySelector('.game-board').innerHTML = tie;
-            console.log('firing tie');
-            return tScore.innerHTML += 1;
-    }
 }
 
 
@@ -198,6 +198,35 @@ function resultValidation() {
 }
 
 
+// announces winner/ end game state to the user
+// it receives an end game state (type), and based on that, we will modify the html
+// first: how do we do this without disrupting the game board?
+// second: if we do disrupt the gameboard, then how do we reset it?
+const announce = (type) => {
+    console.log('announcements are happening')
+    switch(type){
+        case playerOWon:
+            declarationO();
+            console.log('firing O');
+            pOScore += 1;
+            console.log(pOScore)
+            break;
+        case playerXWon:
+            declarationX();
+            console.log('firing X');
+            pXScore += 1
+            console.log(pXScore);
+            break;
+        case tie:
+            declarationT();
+            console.log('firing tie');
+            tScore += 1;
+            console.log(tScore)
+    }
+}
+
+
+
 // reset the gameboard and the score
 // reset the board to empty strings
 // reset isgameactive to true
@@ -217,3 +246,7 @@ const resetBoard = () => {
     })
 }
 resetButton.addEventListener('click', resetBoard);
+
+
+
+
