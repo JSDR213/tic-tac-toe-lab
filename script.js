@@ -124,7 +124,6 @@ function endGame(draw) {
             document.getElementById('playerXScore').innerText = playerXScore;
         }
     }
-
 };
 
 // IS IT A TIE?
