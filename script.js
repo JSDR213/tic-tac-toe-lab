@@ -83,46 +83,24 @@ function oWinner() {
 
 function checkWinner() {
     count ++
-    console.log(count)
-    if (board[0].innerText === "X" && board[1].innerText === "X" && board[2].innerText === "X"){
-        xWinner()
-    } else if (board[0].innerText === "X" && board[3].innerText === "X" && board[6].innerText === "X"){
-        xWinner()
-    } else if (board[0].innerText === "X" && board[4].innerText === "X" && board[8].innerText === "X"){
-        xWinner()
-    } else if (board[1].innerText === "X" && board[4].innerText === "X" && board[7].innerText === "X"){
-        xWinner()
-    } else if (board[2].innerText === "X" && board[4].innerText === "X" && board[6].innerText === "X"){
-        xWinner()
-    } else if (board[2].innerText === "X" && board[5].innerText === "X" && board[8].innerText === "X"){
-        xWinner()
-    } else if (board[3].innerText === "X" && board[4].innerText === "X" && board[5].innerText === "X"){
-        xWinner()
-    } else if (board[6].innerText === "X" && board[7].innerText === "X" && board[8].innerText === "X"){
-        xWinner()
-    } else if (board[0].innerText === "O" && board[1].innerText === "O" && board[2].innerText === "O"){
-        oWinner()
-    } else if (board[0].innerText === "O" && board[3].innerText === "O" && board[6].innerText === "O"){
-        oWinner()
-    } else if (board[0].innerText === "O" && board[4].innerText === "O" && board[8].innerText === "O"){
-        oWinner()
-    } else if (board[1].innerText === "O" && board[4].innerText === "O" && board[7].innerText === "O"){
-        oWinner()
-    } else if (board[2].innerText === "O" && board[4].innerText === "O" && board[6].innerText === "O"){
-        oWinner()
-    } else if (board[2].innerText === "O" && board[5].innerText === "O" && board[8].innerText === "O"){
-        oWinner()
-    } else if (board[3].innerText === "O" && board[4].innerText === "O" && board[5].innerText === "O"){
-        oWinner()
-    } else if (board[6].innerText === "0" && board[7].innerText === "0" && board[8].innerText === "0"){
-        oWinner()
-    }else if (count === 9 && winner === false){
+    const wins = [[0, 1, 2], [0, 3, 6], [0, 4, 8], [1, 4, 7], [2, 4, 6], [2, 5, 8], [3, 4, 5], [6, 7, 8]]
+
+for (let win of wins) {
+  if (board[win[0]].innerText === board[win[1]].innerText && board[win[0]].innerText === board[win[2]].innerText) {
+    if (board[win[0]].innerText === 'X') {
+      xWinner()
+    } else if (board[win[0]].innerText === 'O') {
+      oWinner()
+    } else if (count === 9 && winner === false){
         console.log("tie")
         dTies ++
         count = 0
         ties.innerText = dTies
         alert("Tie, ya Bum!")
         winner = true
+    }
+  }
+
     }
 }
 
