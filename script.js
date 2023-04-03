@@ -1,6 +1,6 @@
 //JS code goes here!
 
-//remember to Whiteboard and Pseduocode before diving into the actual code!
+//remember to Whiteboard and Pseudocode before diving into the actual code!
 
 // OBJECTIVE
 // Build a TIC-TAC-TOE Game with HTML, CSS, Vanilla JavaScript
@@ -41,6 +41,23 @@
 // Listen for click events on the game board cells
 // Call the function to handle player moves with the row and column of the clicked cell
 
+// OBJECTIVE
+// Build a TIC-TAC-TOE Game with HTML, CSS, Vanilla JavaScript
+
+// WHITEBOARDING
+
+// BASIC FUNCTIONALITY NEEDED
+// Clicking into Boxes should input an O or X
+// Pick which Player Goes First O or X
+// Time limit - and if not met, then computer chooses choice 
+// Player cannot play their choice until the previous opponent plays their turn
+// Determine who is Winner (3 in Row) 
+// Tell the User who is Winner
+// Display Score for O, X, and D (Draw)
+// Ask User if they want to play again -> Reset Game
+// Keep Current Score until user refreshes the webpage
+
+// PSEDUOCODING
 
 // VARIABLES
 
