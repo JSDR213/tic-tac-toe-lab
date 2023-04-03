@@ -6,7 +6,6 @@
 // Build a TIC-TAC-TOE Game with HTML, CSS, Vanilla JavaScript
 
 // WHITEBOARDING
-
 // BASIC FUNCTIONALITY NEEDED
 // Clicking into Boxes should input an O or X
 // Pick which Player Goes First O or X
@@ -19,7 +18,6 @@
 // Keep Current Score until user refreshes the webpage
 
 // PSEDUOCODING
-
 // Initialize the game board
 // Create a function to render the game board
 // Loop through the game board array
@@ -41,26 +39,8 @@
 // Listen for click events on the game board cells
 // Call the function to handle player moves with the row and column of the clicked cell
 
-// OBJECTIVE
-// Build a TIC-TAC-TOE Game with HTML, CSS, Vanilla JavaScript
-
-// WHITEBOARDING
-
-// BASIC FUNCTIONALITY NEEDED
-// Clicking into Boxes should input an O or X
-// Pick which Player Goes First O or X
-// Time limit - and if not met, then computer chooses choice 
-// Player cannot play their choice until the previous opponent plays their turn
-// Determine who is Winner (3 in Row) 
-// Tell the User who is Winner
-// Display Score for O, X, and D (Draw)
-// Ask User if they want to play again -> Reset Game
-// Keep Current Score until user refreshes the webpage
-
-// PSEDUOCODING
 
 // VARIABLES
-
 // Creating constant variable for both X|O players and winning combinations
 const playerX = 'x';
 const playerO = 'circle';
@@ -88,14 +68,13 @@ let playerXScore = 0;
 let playerOScore = 0;
 let tiesScore = 0;
 
-
+// Calling Function - START GAME
 startGame();
 
-// EVENT LISTENER
+// EVENT LISTENER - Add for Starting Game
 restartButton.addEventListener('click', startGame);
 
 // FUNCTIONS
-
 // START GAME
 function startGame() {
     isPlayerOTurn = false;
@@ -127,7 +106,7 @@ function handleSquareClick(e) {
 // END GAME
 function endGame(draw) {
     if (draw) {
-        winningMessageText.innerText = "It's a Draw!"
+        winningMessageText.innerText = "It's a Tie!"
     } else {
         winningMessageText.innerText = `Player ${isPlayerOTurn ? "O" : "X"} Wins!`
     }
@@ -148,7 +127,7 @@ function endGame(draw) {
 
 };
 
-// GAME RESULT = DRAW
+// IS IT A TIE?
 function isDraw() {
     return [...squares].every(square => {
         return square.classList.contains(playerX) || square.classList.contains(playerO)
