@@ -25,6 +25,7 @@ body {
       border: 5px solid white;
       text-Align: center;
       color: white;
+      cursor: pointer;
   }
   .square:nth-child(1), .square:nth-child(2), .square:nth-child(3) {
       border-top: none
@@ -55,6 +56,7 @@ body {
   .restart {
     width: 175px;
     border: none;
+    padding: 2rem;
     border-radius: 50%;
     background-color: black;
     color: white;
@@ -62,9 +64,9 @@ body {
   }
   .restart:hover {
     font-weight: bold;
-    border: 5px solid white;
-    border-radius: 50%;
-    padding: 15px
+    outline: 2px solid white;
+    /* outline-offset: 15px; */
+    /* padding: 2rem; */
   
   }
 
