@@ -1,51 +1,58 @@
-<head>
-    <title> JS DOM-Tac-Toe</title>
-    <link rel="stylesheet" href="style.css"/>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> JS DOM-Tac-Toe</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 
-
 <body>
-<header>
-  <h1>Tic-Tac-Toe</h1>
-  <h2>
-    <table class = "score-track">
-      <tr class="score-columns-all">
-        <th class="score-column">Player X </th>
-        <th class="score-column">Ties</th>
-        <th class="score-column">Player O</th>
-      </tr>
-      <tr>
-        <td class="score-row" id="playerXScore">0</th>
-        <td class="score-row" id="ties">0</th>
-        <td class="score-row" id="playerOScore">0</th>
-      </tr>
+  <header>
+    <h1>Tic-Tac-Toe</h1>
+    <h2>
+      <table class="score-track">
+        <tr class="score-columns-all">
+          <th class="score-column" id="playerX">Player X </th>
+          <th class="score-column" id="ties">Ties</th>
+          <th class="score-column" id="playerO">Player O</th>
+        </tr>
+        <tr>
+          <td class="score-row" id="playerXScore">0</th>
+          <td class="score-row" id="tiesScore">0</th>
+          <td class="score-row" id="playerOScore">0</th>
+        </tr>
 
-    </table>
-  </h2>  
-</header>
+      </table>
+    </h2>
+    <h3>X'S GO FIRST!</h3>
+  </header>
 
-<main>
-      <div class="game-board">
-        <div class="square" id="square0" square-index="0"></div>
-        <div class="square" id="square1" square-index="1"></div>
-        <div class="square" id="square2" square-index="2"></div>
-        <div class="square" id="square3" square-index="3"></div>
-        <div class="square" id="square4" square-index="4"></div>
-        <div class="square" id="square5" square-index="5"></div>
-        <div class="square" id="square6" square-index="6"></div>
-        <div class="square" id="square7" square-index="7"></div>
-        <div class="square" id="square8" square-index="8"></div>
-      </div>
-</main>
+  <main>
+    <div class="game-board" id="gameBoard">
+      <div class="square" id="square0" square-index="0"></div>
+      <div class="square" id="square1" square-index="1"></div>
+      <div class="square" id="square2" square-index="2"></div>
+      <div class="square" id="square3" square-index="3"></div>
+      <div class="square" id="square4" square-index="4"></div>
+      <div class="square" id="square5" square-index="5"></div>
+      <div class="square" id="square6" square-index="6"></div>
+      <div class="square" id="square7" square-index="7"></div>
+      <div class="square" id="square8" square-index="8"></div>
+    </div>
+  </main>
 
-<footer>
+  <footer>
+    <div class="winning-message" id="winningMessage">
+      <div id="winningMessageText"></div>
+      <button class="restart-button" id="restartButton">Restart</button>
+    </div>
+  </footer>
 
-    <button class="restart">Restart</button>
-
-</footer>
-
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 
 </body>
+
+</html>
