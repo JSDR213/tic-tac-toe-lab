@@ -25,14 +25,6 @@
 // Then need to set the innertext to X or O?
 
 
-
-
-
-//win conditions
-
-
-//game logic
-
 // this object contains all of the square values and I can use it to compare vs win conditions
 let squareValues = {
     square0: null,
@@ -54,10 +46,14 @@ const square = document.querySelectorAll('.square')
 
 const title = document.querySelector('h1')
 
+
+
 // Had to use .innerText and then parseInt
 let xScore = document.getElementById('playerXScore').innerText
 
 let oScore = document.getElementById('playerOScore').innerText
+
+let draw = document.getElementById('ties').innerText
 
 
 square.forEach(function(currentSquare) {
@@ -68,7 +64,7 @@ square.forEach(function(currentSquare) {
     currentSquare.addEventListener('click', (event) => {
         console.log(squareValues)
         const target = event.currentTarget
-        if (squareValues.gameWon == true) {
+        if (squareValues.gameWon == true || squareValues.gameDraw == true) {
             return
         }
         if (!target.matches('div')) {
@@ -81,10 +77,14 @@ square.forEach(function(currentSquare) {
         // if (squareValues.gameWon == true) statement above and returns
         winConditions(squareValues)
         scoreTally (squareValues)
+
+        // via trial and error, this was the right place to call the reset function
+        reset(squareValues)
     })
 }
 }
 )
+
 
 
 
@@ -99,9 +99,6 @@ function turnTracker (foo) {
         // some function that goes between X and O here
         crossOrCircle(target.id)
         squareValues.square0 = squareValues.squareMark // replace X with the output of the X and O function used above
-        //console.log(squareValues)
-        // need something that removes event listeners from cells that are clicked
-        //target.removeEventListener('click', target.id)
         target.innerText = squareValues.squareMark
         }
     }
@@ -185,9 +182,8 @@ function turnTracker (foo) {
         target.innerText = squareValues.squareMark
         }
     }
-    //squareValues.isItXsTurn = false
-    //console.log(squareValues)
-    //console.log(`${squareValues.isItXsTurn}`)
+
+    // tells whose turn it is
     if (squareValues.isItXsTurn === false) {
         title.innerText = "It is O's turn!"
     }
@@ -219,7 +215,6 @@ function crossOrCircle (toggle) {
 // This function will contain ALL winning combinations
 function winConditions (squareValues) {
     const {square0, square1, square2, square3, square4, square5, square6, square7, square8} = squareValues
-    //console.log(squareValues)
     for (i = 0; i < 8; i++) {
     // top row all matches
     if (square0 == square1 && square1 == square2 && square0 != null && square1 != null && square2 != null) {
@@ -295,23 +290,34 @@ function scoreTally (squareValues) {
             playerOScore.innerText = oScore
         }
     }
+    if (squareValues.gameDraw == true) {
+        draw = parseInt(draw)
+        draw = draw + 1
+        console.log(draw)
+        ties.innerText = draw
+    }
 }
 
 // need to write a restart button that empties all values on the board and in the squareValues object
-function reset () {
-    document.querySelector('restart').addEventListener('click', (event) => {
-        square.forEach(bar)
-        function bar (placeholder) {
 
-        }
-    })
+function reset (squareValues) {
+    // need to do the if statement first, if i start with document.querySelector it won't work
+    if (squareValues.gameWon == true || squareValues.gameDraw == true) {
+        document.querySelector('.restart').addEventListener('click', (event) => {
+            squareValues.square0 = null
+            squareValues.square1 = null
+            squareValues.square2 = null
+            squareValues.square3 = null
+            squareValues.square4 = null
+            squareValues.square5 = null
+            squareValues.square6 = null
+            squareValues.square7 = null
+            squareValues.square8 = null
+            squareValues.squareMark = null
+            squareValues.gameWon = false
+            squareValues.isItXsTurn = true
+            square.forEach(square => square.innerText = '')
+        })
+    }
 }
 
-
-// function that locks all squares by removing eventListeners if gameWon = true
-//function lockSquares (squareValues) {
-//    const {gameWon} = squareValues
-//    if (gameWon == true) {
-//        document.removeEventListener('click', event)
-//    }
-//}
