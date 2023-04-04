@@ -24,7 +24,7 @@
 // Display the cell values in a visual format(e.g., HTML table)
 // Set the initial game state\
 // Set a variable 'currentPlayer' to either 'X' or 'O'
-// Set a variable 'gameOver' to false
+// Set a variable 'endGame' to false
 // Create a function to handle player moves
 // Accept row and column as parameters
 // Check if the selected cell is empty
@@ -33,7 +33,7 @@
 // Create a function to check for a winner or a draw
 // Check rows, columns, and diagonals for three matching symbols
 // If there' s a winner, set 'endGame' to true and display a winning message
-// If there 's no winner and the board is full, set ' gameOver ' to true and display a draw message
+// If there 's no winner and the board is full, set ' endGame ' to true and display a draw message
 // Otherwise, continue the game
 // Add event listeners for user input
 // Listen for click events on the game board cells
