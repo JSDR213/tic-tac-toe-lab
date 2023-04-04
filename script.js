@@ -7,7 +7,6 @@ let playerXScore = document.querySelector("#playerXScore")
 let chickScore = 0
 let eggScore = 0
 let tieScoreNum = 0
-let newChickScore = Number(playerXScore.innerHTML) 
 const playerOScore = document.querySelector("#playerOScore")
 const tieScore = document.querySelector("#ties")
 const statusText = document.querySelector("#status_text")
@@ -25,6 +24,7 @@ let options = ["", "", "", "", "", "", "", "", ""]
 let running = false
 let currentPlayer = "&#128019;"
 let bestOf = document.querySelector("#best_of")
+
 
 
 function startGame () {
@@ -58,6 +58,18 @@ function changePlayer() {
     statusText.innerHTML = `It is ${currentPlayer}'s turn.`
 }
 
+//I was working on trying to get a computer move but didn't get very far
+// function eggMove () {
+//     const random = Math.floor(Math.random() * allSquares.length)
+//     const eggIndex = allSquares[random]
+//     console.log(allSquares[random])
+//     if (statusText.innerHTML == `It is &#128019;'s turn.`){
+//         console.log(allSquares[random])
+//         eggIndex.innerHTML == ":)"
+//     }
+// }      
+
+ 
 
 function checkWin () {
     let winnerWinnerChickenDinner = false
@@ -71,17 +83,14 @@ function checkWin () {
      if(A == "" || B == "" || C == "" ){
         console.log(winnerWinnerChickenDinner)
         continue;
+
         }
 
      if(A == B && B == C) {
         winnerWinnerChickenDinner = true
         console.log(winnerWinnerChickenDinner)
-        if (currentPlayer == "&#128019;") {
-            newChickScore += 1
-        }
-        else if(currentPlayer == "&#129370;"){
-        }
-        break;
+        
+        break
         
         }
     }
@@ -91,26 +100,45 @@ function checkWin () {
         wholeBoard.removeEventListener(`click`, startGame)
         allSquares.forEach(allSquares => allSquares.removeEventListener("click", squareClicked))
         running = false
-
         bestOf.innerHTML = "Rematch?"
 
+        if (currentPlayer == "&#128019;") {
+            
+           
+            chickScore = chickScore + 1
+            console.log(chickScore)
+            playerXScore.innerHTML = chickScore
+        
+
     }
+
+        else if(currentPlayer == "&#129370;"){
+        
+        eggScore = eggScore + 1
+        console.log(eggScore)
+        playerOScore.innerHTML = eggScore
+    
+    
+
+    }
+}
     else if(!options.includes("")){
         statusText.innerHTML = `Tie! Now we'll never know if the &#128019; or &#129370; came first.`
         console.log('tie')
         tieScore.innerHTML = + 1
         running = false
         bestOf.innerHTML = "Rematch?"
-    }
+
+            tieScoreNum = tieScoreNum+ 1
+            console.log(tieScoreNum)
+            tieScore.innerHTML = tieScoreNum}
+    
+
     else {
         changePlayer()
     }
 }
 
-
-function clearScore () {
-    localStorage.clear()
-}
 
 function rematch () {
 currentPlayer = "&#128019;"
@@ -133,14 +161,6 @@ function clearBoard () {
 restart.addEventListener(`click`, clearBoard)
 wholeBoard.addEventListener(`click`, startGame)
 bestOf.addEventListener(`click`, rematch)
+wholeBoard.addEventListener(`click`, eggMove)
 
 
-// need to figure out how to store the wins -- local storage
-// need to figure out how to make the computer play somehow
-
-// function endClick () {
-//     if(winnerWinnerChickenDinner){
-//     console.log(`hi`)
-//     allSquares.forEach(allSquares => allSquares.removeEventListener("click", squareClicked))}
-//     wholeBoard.removeEventListener(`click`, startGame)
-// }
