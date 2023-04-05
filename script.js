@@ -66,9 +66,9 @@ const squares = document.querySelectorAll('.square')
 let playerDisplay = document.getElementById('title1')
 const resetButton = document.querySelector('.restart')
 const announcer = document.querySelector('.score-track')
-let pXScore = parseInt(document.getElementById('playerXScore').innerText=0)
-let pOScore = parseInt(document.getElementById('playerOScore').innerText=0)
-let tScore = parseInt(document.getElementById('ties').innerText=0)
+let playerXScore1 = 0;
+let playerOScore1 = 0;
+let tiesScore1 = 0;
 
 
 // more variables that we'll need for the game.
@@ -93,31 +93,6 @@ const winCriteria = [
 ]
 
 
-// creating new element to add to DOM to show winner:
-const declarationX = () => {
-    let newE = document.createElement("h1");
-    let newText = document.createTextNode(playerXWon);
-    newE.appendChild(newText);
-    let tester = document.getElementById("title1");
-    tester.appendChild(newE)
-}
-
-const declarationO = () => {
-    let newE2 = document.createElement("h1");
-    let newText2 = document.createTextNode(playerOWon);
-    newE2.appendChild(newText2);
-    let tester = document.getElementById("title1");
-    tester.appendChild(newE2)
-}
-
-const declarationT = () => {
-    let newE3 = document.createElement("h1");
-    let newText3 = document.createTextNode(tie);
-    newE3.appendChild(newText3);
-    let tester = document.getElementById("title1");
-    tester.appendChild(newE3)
-}
-
 // event listener to listen to each square on the board
 // upon clicking, the userAction function will be called, referencing the tile and index
 squares.forEach((square, index) => {
@@ -133,7 +108,6 @@ const isValidAction = (square) => {
     }
     return true;
 };
-
 
 
 // represents a turn in the game. This will be called when the user clicks on a tile
@@ -206,22 +180,25 @@ const announce = (type) => {
     console.log('announcements are happening')
     switch(type){
         case playerOWon:
-            declarationO();
+            document.getElementById('win-message').innerText = "Player O Won!"
             console.log('firing O');
-            pOScore += 1;
-            console.log(pOScore)
+            playerOScore1++
+            document.getElementById('playerOScore').innerText = playerOScore1;
+            console.log(playerOScore1)
             break;
         case playerXWon:
-            declarationX();
+            document.getElementById('win-message').innerText = "Player X Won!"
             console.log('firing X');
-            pXScore += 1
-            console.log(pXScore);
+            playerXScore1++
+            document.getElementById('playerXScore').innerText = playerXScore1;
+            console.log(playerXScore1);
             break;
         case tie:
-            declarationT();
+            document.getElementById('win-message').innerText = "It's a Tie -__-"
             console.log('firing tie');
-            tScore += 1;
-            console.log(tScore)
+            tiesScore1++
+            document.getElementById('ties').innerText = tiesScore1
+            console.log(tiesScore1)
     }
 }
 
@@ -235,6 +212,7 @@ const announce = (type) => {
 const resetBoard = () => {
     console.log('clicked')
     board = ['', '', '', '', '', '', '', '', ''];
+    document.getElementById('win-message').innerText = ""
     isGameActive = true;
     if (currentPlayer === 'o') {
         changePlayer()
@@ -246,7 +224,4 @@ const resetBoard = () => {
     })
 }
 resetButton.addEventListener('click', resetBoard);
-
-
-
 
