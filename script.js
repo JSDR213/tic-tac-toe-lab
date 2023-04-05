@@ -1,4 +1,7 @@
-// //VARIABLES
+//SOURCES
+https://www.youtube.com/watch?v=oZrp3Atkz18
+
+//VARIABLES
 const playerXScore = document.querySelector('#playerXScore')
 const playerOScore = document.querySelector('#playerOScore')
 const ties = document.querySelector('#ties')
