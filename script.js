@@ -88,7 +88,7 @@ square.forEach((b) => {b.addEventListener('click', (Event) => {
             b.innerText = ("O")
             playerOpositions.push(sqIndex)
             checkForWin(playerOpositions, "O")
-            }
+        }
 
         //switch turns
         turn +=1
@@ -98,5 +98,4 @@ square.forEach((b) => {b.addEventListener('click', (Event) => {
         ties.innerText = Number(ties.innerText) + 1
         restart()
     }
-
-    })})
+})})
